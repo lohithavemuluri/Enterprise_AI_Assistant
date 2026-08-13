@@ -9,3 +9,4 @@ plotly
 matplotlib
 opencv-python-headless
 pytesseract
+pymupdf
