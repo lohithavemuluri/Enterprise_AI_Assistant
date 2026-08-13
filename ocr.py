@@ -2,20 +2,15 @@ import pymupdf
 import pytesseract
 from PIL import Image
 import io
-
-
-# =====================================================
-# TESSERACT CONFIGURATION
-# =====================================================
+
+# TESSERACT CONFIGURATION
 
 pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 )
 
 
-# =====================================================
-# OCR PDF FUNCTION
-# =====================================================
+# OCR PDF FUNCTION
 
 def extract_text_with_ocr(pdf_bytes):
 
