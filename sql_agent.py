@@ -4,14 +4,10 @@ import sqlite3
 from dotenv import load_dotenv
 from google import genai
 
-
 # Load API key
 load_dotenv()
-
 api_key = os.getenv("AIzaSyBfWIq2C6QJm5oQMhmqra9G-gVLPD0Hco8")
-
-client = genai.Client(api_key=api_key)
-client = genai.client()
+client = genai.Client(api_key=AIzaSyBfWIq2C6QJm5oQMhmqra9G-gVLPD0Hco8)
 
 # Database connection
 DATABASE = "enterprise.db"
