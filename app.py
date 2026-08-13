@@ -15,14 +15,13 @@ from evaluation import show_evaluation
 from monitoring import log_info, log_error
 from auth import login, logout
 from ocr import extract_text_with_ocr
-# LOAD API KEY
 
+# LOAD API KEY
 load_dotenv()
 
-api_key = os.getenv("AIzaSyBfWIq2C6QJm5oQMhmqra9G-gVLPD0Hco8")
+api_key = os.getenv("GEMINI_API_KEY")
 
 client = genai.Client(api_key=api_key)
-
 
 # PAGE SETTINGS
 
