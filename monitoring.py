@@ -1,8 +1,7 @@
 import logging
 
 # LOG FILE
-
-
+
 logging.basicConfig(
     filename="app.log",
     level=logging.INFO,
