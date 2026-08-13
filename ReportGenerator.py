@@ -5,22 +5,21 @@ from dotenv import load_dotenv
 from google import genai
 
 
-
 # LOAD API KEY
-
 
 load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
 
 client = genai.Client(api_key=api_key)
-
-# DATABASE
+
+
+# DATABASE
 
 DB_PATH = "enterprise.db"
 
 
-# GENERATE REPORT
+# GENERATE REPORT
 
 def generate_report():
 
@@ -29,16 +28,16 @@ def generate_report():
     st.write(
         "Generate an intelligent business report "
         "using data from the enterprise database."
-    )
-    # CONNECT TO DATABASE
+    )
 
-     try:
+    # CONNECT TO DATABASE
+
+    try:
 
         conn = sqlite3.connect(DB_PATH)
-
         cursor = conn.cursor()
-
-        # GET TABLES
+
+        # GET TABLES
 
         cursor.execute("""
             SELECT name
@@ -49,8 +48,9 @@ def generate_report():
         tables = [
             row[0]
             for row in cursor.fetchall()
-        ]
-        # GET BASIC DATABASE INFORMATION
+        ]
+
+        # GET BASIC DATABASE INFORMATION
 
         database_info = ""
 
@@ -63,12 +63,11 @@ def generate_report():
             rows = cursor.fetchall()
 
             database_info += f"\n\nTABLE: {table}\n"
-
             database_info += str(rows)
 
         conn.close()
 
-        # GENERATE REPORT BUTTON
+        # GENERATE REPORT BUTTON
 
         if st.button("📄 Generate AI Report"):
 
@@ -107,13 +106,13 @@ Write the report in clear, professional language.
                     contents=prompt
                 )
 
-               
                 # DISPLAY REPORT
 
                 st.subheader("📋 Generated Business Report")
 
-                st.write(response.text)
-                # DOWNLOAD REPORT
+                st.write(response.text)
+
+                # DOWNLOAD REPORT
 
                 st.download_button(
                     label="⬇️ Download Report",
