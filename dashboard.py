@@ -39,10 +39,8 @@ def show_dashboard():
     st.header("📊 Enterprise Dashboard")
 
     data = load_data()
-
-    # -----------------------------------------
-    # KPI VALUES
-    # -----------------------------------------
+
+    # KPI VALUES
 
     total_sales = data["sale_amount"].sum()
 
@@ -51,11 +49,8 @@ def show_dashboard():
     total_employees = data["employee_name"].nunique()
 
     total_products = data["product_name"].nunique()
-
-
-    # -----------------------------------------
-    # KPI CARDS
-    # -----------------------------------------
+
+    # KPI CARDS
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -84,12 +79,8 @@ def show_dashboard():
         )
 
 
-    st.divider()
-
-
-    # -----------------------------------------
-    # SALES BY PRODUCT
-    # -----------------------------------------
+    st.divider()
+    # SALES BY PRODUCT
 
     st.subheader("📈 Sales by Product")
 
@@ -102,10 +93,7 @@ def show_dashboard():
 
     st.bar_chart(product_sales)
 
-
-    # -----------------------------------------
     # SALES BY DEPARTMENT
-    # -----------------------------------------
 
     st.subheader("🏢 Sales by Department")
 
@@ -116,12 +104,8 @@ def show_dashboard():
         .sort_values(ascending=False)
     )
 
-    st.bar_chart(department_sales)
-
-
-    # -----------------------------------------
-    # SALES TREND
-    # -----------------------------------------
+    st.bar_chart(department_sales)
+    # SALES TREND
 
     st.subheader("📅 Sales Trend")
 
@@ -136,11 +120,8 @@ def show_dashboard():
     )
 
     st.line_chart(daily_sales)
-
-
-    # -----------------------------------------
-    # SALES DATA
-    # -----------------------------------------
+
+    # SALES DATA
 
     st.subheader("📋 Sales Data")
 
