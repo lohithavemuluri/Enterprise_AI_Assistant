@@ -1,9 +1,7 @@
 import logging
-
-
-# =====================================================
+
 # LOG FILE
-# =====================================================
+
 
 logging.basicConfig(
     filename="app.log",
@@ -11,10 +9,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-
-# =====================================================
-# LOG FUNCTIONS
-# =====================================================
+# LOG FUNCTIONS
 
 def log_info(message):
     logging.info(message)
