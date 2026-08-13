@@ -17,9 +17,9 @@ from auth import login, logout
 from ocr import extract_text_with_ocr
 
 
-# =====================================================
+
 # LOAD API KEY
-# =====================================================
+
 
 load_dotenv()
 
@@ -27,21 +27,17 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 client = genai.Client(api_key=api_key)
 
-
-# =====================================================
+
 # PAGE SETTINGS
-# =====================================================
+
 
 st.set_page_config(
     page_title="Enterprise AI Assistant",
     page_icon="🤖",
     layout="wide"
 )
-
-
-# =====================================================
-# LOGIN
-# =====================================================
+
+# LOGIN
 
 if not login():
     st.stop()
@@ -51,9 +47,7 @@ logout()
 log_info("Enterprise AI Assistant started")
 
 
-# =====================================================
-# TITLE
-# =====================================================
+# TITLE
 
 st.title("🤖 Enterprise AI Assistant")
 
@@ -63,9 +57,8 @@ st.write(
 )
 
 
-# =====================================================
 # SIDEBAR
-# =====================================================
+
 
 st.sidebar.title("Navigation")
 
@@ -81,9 +74,8 @@ option = st.sidebar.radio(
 )
 
 
-# =====================================================
 # 1. DOCUMENT ASSISTANT
-# =====================================================
+
 
 if option == "📄 Document Assistant":
 
@@ -104,18 +96,14 @@ if option == "📄 Document Assistant":
     if uploaded_file is not None:
 
         try:
-
-            # -----------------------------------------
-            # READ PDF BYTES
-            # -----------------------------------------
+
+            # READ PDF BYTES
 
             pdf_bytes = uploaded_file.getvalue()
 
             full_text = ""
 
-            # -----------------------------------------
-            # FIRST TRY NORMAL PDF TEXT EXTRACTION
-            # -----------------------------------------
+            # FIRST TRY NORMAL PDF TEXT EXTRACTION
 
             pdf_reader = PdfReader(
                 uploaded_file
@@ -129,10 +117,7 @@ if option == "📄 Document Assistant":
 
                     full_text += page_text + "\n"
 
-
-            # -----------------------------------------
-            # OCR FALLBACK
-            # -----------------------------------------
+            # OCR FALLBACK
 
             if not full_text.strip():
 
@@ -175,10 +160,8 @@ if option == "📄 Document Assistant":
                     f"Normal PDF uploaded: {uploaded_file.name}"
                 )
 
-
-            # -----------------------------------------
             # CHECK EXTRACTED TEXT
-            # -----------------------------------------
+       
 
             if full_text.strip():
 
@@ -188,9 +171,7 @@ if option == "📄 Document Assistant":
                 )
 
 
-                # -------------------------------------
-                # CHUNK DOCUMENT
-                # -------------------------------------
+                # CHUNK DOCUMENT
 
                 chunk_size = 1500
 
@@ -210,10 +191,7 @@ if option == "📄 Document Assistant":
 
                         chunks.append(chunk)
 
-
-                # -------------------------------------
-                # TF-IDF SEARCH
-                # -------------------------------------
+                # TF-IDF SEARCH
 
                 if len(chunks) > 0:
 
@@ -228,10 +206,8 @@ if option == "📄 Document Assistant":
                     )
 
 
-                    # ---------------------------------
                     # QUESTION
-                    # ---------------------------------
-
+     
                     question = st.text_input(
                         "Ask a question about your document:"
                     )
@@ -249,9 +225,9 @@ if option == "📄 Document Assistant":
 
                             try:
 
-                                # -------------------------
+                          
                                 # QUESTION VECTOR
-                                # -------------------------
+                    
 
                                 question_vector = (
                                     vectorizer.transform(
@@ -259,10 +235,7 @@ if option == "📄 Document Assistant":
                                     )
                                 )
 
-
-                                # -------------------------
-                                # SIMILARITY
-                                # -------------------------
+                                # similarity
 
                                 similarities = (
                                     cosine_similarity(
@@ -271,10 +244,9 @@ if option == "📄 Document Assistant":
                                     )[0]
                                 )
 
-
-                                # -------------------------
+            
                                 # TOP 3 CHUNKS
-                                # -------------------------
+                       
 
                                 top_indices = (
                                     similarities.argsort()[
@@ -296,9 +268,8 @@ if option == "📄 Document Assistant":
                                     )
 
 
-                                # -------------------------
                                 # GEMINI
-                                # -------------------------
+                       
 
                                 prompt = f"""
 You are an Enterprise AI Assistant.
@@ -331,9 +302,9 @@ Give a clear, professional and concise answer.
                                 )
 
 
-                                # -------------------------
+                      
                                 # DISPLAY ANSWER
-                                # -------------------------
+                         
 
                                 st.subheader(
                                     "🤖 AI Answer"
@@ -391,9 +362,7 @@ Give a clear, professional and concise answer.
             )
 
 
-# =====================================================
 # 2. SQL DATABASE ASSISTANT
-# =====================================================
 
 elif option == "🗄️ SQL Database Assistant":
 
@@ -415,10 +384,7 @@ elif option == "🗄️ SQL Database Assistant":
         "products and sales."
     )
 
-
-    # ---------------------------------------------
-    # QUESTION
-    # ---------------------------------------------
+    # QUESTION
 
     question = st.text_input(
         "Ask a question about your business data:"
@@ -446,10 +412,7 @@ elif option == "🗄️ SQL Database Assistant":
                     )
 
 
-                # ---------------------------------
-                # ANSWER
-                # ---------------------------------
-
+                # ANSWER
                 st.subheader(
                     "🤖 AI Answer"
                 )
@@ -459,9 +422,8 @@ elif option == "🗄️ SQL Database Assistant":
                 )
 
 
-                # ---------------------------------
                 # SQL
-                # ---------------------------------
+        
 
                 if sql:
 
@@ -497,9 +459,7 @@ elif option == "🗄️ SQL Database Assistant":
             )
 
 
-# =====================================================
-# 3. ENTERPRISE DASHBOARD
-# =====================================================
+# 3. ENTERPRISE DASHBOARD
 
 elif option == "📊 Enterprise Dashboard":
 
@@ -526,9 +486,7 @@ elif option == "📊 Enterprise Dashboard":
         )
 
 
-# =====================================================
 # 4. AI REPORT GENERATOR
-# =====================================================
 
 elif option == "📑 AI Report Generator":
 
@@ -553,11 +511,8 @@ elif option == "📑 AI Report Generator":
         st.error(
             "Unable to open the report generator."
         )
-
-
-# =====================================================
-# 5. AI RESPONSE EVALUATION
-# =====================================================
+
+# 5. AI RESPONSE EVALUATION
 
 elif option == "🔍 AI Response Evaluation":
 
