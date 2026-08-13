@@ -3,21 +3,15 @@ import streamlit as st
 from dotenv import load_dotenv
 from google import genai
 
-
-# =====================================================
-# LOAD API KEY
-# =====================================================
-
+# LOAD KEY
 load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
 
 client = genai.Client(api_key=api_key)
 
-
-# =====================================================
-# EVALUATE AI RESPONSE
-# =====================================================
+
+# EVALUATE AI RESPONSE
 
 def evaluate_response(question, context, answer):
 
@@ -59,9 +53,7 @@ give a low Accuracy score.
     return response.text
 
 
-# =====================================================
 # EVALUATION PAGE
-# =====================================================
 
 def show_evaluation():
 
@@ -71,10 +63,8 @@ def show_evaluation():
         "Evaluate the quality of an AI-generated answer "
         "using a question and supporting context."
     )
-
-    # ---------------------------------------------
-    # USER INPUT
-    # ---------------------------------------------
+
+    # USER INPUT
 
     question = st.text_input(
         "Enter the question:"
@@ -89,10 +79,9 @@ def show_evaluation():
         "Enter the AI answer:",
         height=150
     )
-
-    # ---------------------------------------------
+ 
     # EVALUATE BUTTON
-    # ---------------------------------------------
+ 
 
     if st.button("🔍 Evaluate AI Response"):
 
